@@ -8,10 +8,13 @@ from CybORG.Agents.Wrappers.BaseWrapper import BaseWrapper
 
 
 class OpenAIGymWrapper(Env, BaseWrapper):
-    def __init__(self, agent_name: str, env: BaseWrapper = None, agent: BaseAgent = None):
+    def __init__(self, agent_name: str, env: BaseWrapper = None, agent: BaseAgent = None, multi_dis=False):
         super().__init__(env, agent_name)
         self.agent_name = agent_name
-        if isinstance(self.get_action_space(self.agent_name), list):
+        if multi_dis:
+            dims = self.get_action_space(self.agent_name)
+            self.action_space = spaces.MultiDiscrete(dims)
+        elif isinstance(self.get_action_space(self.agent_name), list):
             self.action_space = spaces.MultiDiscrete(self.get_action_space(self.agent_name))
         else:
             assert isinstance(self.get_action_space(self.agent_name), int)

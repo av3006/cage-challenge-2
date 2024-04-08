@@ -7,3 +7,6 @@ from .TrueTableWrapper import TrueTableWrapper
 from .EnumActionWrapper import EnumActionWrapper
 from .ChallengeWrapper import ChallengeWrapper
 from .ReduceActionSpaceWrapper import ReduceActionSpaceWrapper
+from .RewShapeWrapper import RewShapeWrapper
+from .RewShapeBlue import RewShapeBlue
+from .MultiDisWrapper import MultiDisWrapper

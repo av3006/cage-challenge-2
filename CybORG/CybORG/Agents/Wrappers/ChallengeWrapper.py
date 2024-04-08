@@ -14,8 +14,8 @@ class ChallengeWrapper(Env,BaseWrapper):
         else:
             raise ValueError('Invalid Agent Name')
 
-        env = table_wrapper(env, output_mode='vector')
-        env = EnumActionWrapper(env)
+        self.envTable = table_wrapper(env, output_mode='vector')
+        env = EnumActionWrapper(self.envTable)
         env = OpenAIGymWrapper(agent_name=agent_name, env=env)
 
         self.env = env
@@ -37,6 +37,9 @@ class ChallengeWrapper(Env,BaseWrapper):
     def reset(self):
         self.step_counter = 0
         return self.env.reset()
+    
+    def get_table(self):
+        return self.envTable.get_table(output_mode='true_table')
 
     def get_attr(self,attribute:str):
         return self.env.get_attr(attribute)
